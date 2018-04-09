@@ -202,3 +202,17 @@ func Test_ToNoCase(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkToSnakeCase(b *testing.B) {
+	n := len(testCases)
+	for i := 0; i < b.N; i++ {
+		ToSnakeCase(testCases[i%n])
+	}
+}
+
+func BenchmarkToCamelCase(b *testing.B) {
+	n := len(testCases)
+	for i := 0; i < b.N; i++ {
+		ToCamelCase(testCases[i%n])
+	}
+}
