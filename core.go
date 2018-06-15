@@ -17,7 +17,7 @@ var (
 	// ToCamelCase converts string to CamelCase. All space symbols, `_`, `.` and `-` will be removed. First symbol will be capital.
 	ToCamelCase = toCamelCase(true, unicode.ToUpper)
 	// ToCamelCase converts string to CamelCase. All space symbols, `_`, `.` and `-` will be removed. First symbol will be capital.
-	ToCamelCaseLowerFirst = toCamelCase(false, unicode.ToUpper)
+	ToCamelCaseLowerFirst = toCamelCaseLower()
 	// ToNoCase returns input's string. Should be used for mocking, tests, etc.
 	ToNoCase = func(s string) string { return s }
 )
@@ -59,6 +59,43 @@ func toCamelCase(upperFirst bool, runeConv func(rune) rune) func(string) string 
 			}
 			if i > 0 && isExtendedSpace(in[i-1]) && unicode.IsLower(r) || i == 0 && upperFirst {
 				r = runeConv(r)
+			}
+			runes = append(runes, r)
+		}
+		return string(runes)
+	}
+}
+
+func toCamelCaseLower() func(string) string {
+	return func(s string) string {
+		in := []rune(s)
+		var runes []rune
+		max, m := len(in), 0
+		for i, r := range in {
+			if !isExtendedSpace(r) && (i+1 < max && unicode.IsUpper(in[i+1])) {
+				runes = append(runes, unicode.ToLower(r))
+				continue
+			}
+			m = i
+			break
+		}
+		if len(in[m:]) == 1 {
+			return string(append(runes, unicode.ToLower(in[m])))
+		}
+		for i, r := range in[m:] {
+			if isExtendedSpace(r) {
+				continue
+			}
+			if unicode.IsUpper(r) {
+				if i+m > 0 {
+					runes = append(runes, r)
+				} else {
+					runes = append(runes, unicode.ToLower(r))
+				}
+				continue
+			}
+			if i+m > 0 && isExtendedSpace(in[i+m-1]) && unicode.IsLower(r) {
+				r = unicode.ToUpper(r)
 			}
 			runes = append(runes, r)
 		}

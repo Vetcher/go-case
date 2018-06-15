@@ -21,6 +21,8 @@ var testCases = []string{
 	"ТестКириллицы",
 	"Ещё-Тест Кириллицы",
 	"и-ещё-тест.Кириллицы",
+	"MQ",
+	"MTT",
 }
 
 func Test_ToSnakeCase(t *testing.T) {
@@ -40,6 +42,8 @@ func Test_ToSnakeCase(t *testing.T) {
 		"тест_кириллицы",
 		"ещё_тест_кириллицы",
 		"и_ещё_тест_кириллицы",
+		"mq",
+		"mtt",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
@@ -70,6 +74,8 @@ func Test_ToUrlSnakeCase(t *testing.T) {
 		"тест-кириллицы",
 		"ещё-тест-кириллицы",
 		"и-ещё-тест-кириллицы",
+		"mq",
+		"mtt",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
@@ -100,6 +106,8 @@ func Test_ToDotSnakeCase(t *testing.T) {
 		"тест.кириллицы",
 		"ещё.тест.кириллицы",
 		"и.ещё.тест.кириллицы",
+		"mq",
+		"mtt",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
@@ -130,6 +138,8 @@ func Test_ToCamelCase(t *testing.T) {
 		"ТестКириллицы",
 		"ЕщёТестКириллицы",
 		"ИЕщёТестКириллицы",
+		"MQ",
+		"MTT",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
@@ -146,20 +156,22 @@ func Test_ToCamelCase(t *testing.T) {
 func Test_ToCamelCaseLowerFirst(t *testing.T) {
 	answers := []string{
 		"stringService",
-		"StringService",
-		"Stringservice",
 		"stringService",
-		"StringService",
+		"stringservice",
 		"stringService",
-		"JSONService",
+		"stringService",
+		"stringService",
 		"jsonService",
-		"JSONServiceV2",
-		"JSONServiceV2",
-		"StringService",
-		"StringService",
-		"ТестКириллицы",
-		"ЕщёТестКириллицы",
+		"jsonService",
+		"jsonServiceV2",
+		"jsonServiceV2",
+		"stringService",
+		"stringService",
+		"тестКириллицы",
+		"ещёТестКириллицы",
 		"иЕщёТестКириллицы",
+		"mq",
+		"mtt",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
@@ -190,6 +202,8 @@ func Test_ToNoCase(t *testing.T) {
 		"ТестКириллицы",
 		"Ещё-Тест Кириллицы",
 		"и-ещё-тест.Кириллицы",
+		"MQ",
+		"MTT",
 	}
 	if len(testCases) != len(answers) {
 		t.Fatal("different amount of test cases and expected answers")
